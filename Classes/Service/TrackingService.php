@@ -3,13 +3,15 @@ namespace Aashro\AtAnalyticsLite\Service;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 
 class TrackingService
 {
     protected const SESSION_KEY = 'at_analytics_lite_last_tracked';
 
     public function __construct(
-        protected ConnectionPool $connectionPool
+        protected ConnectionPool $connectionPool,
+        protected ExtensionConfiguration $extensionConfiguration
     ) {}
 
     public function track(ServerRequestInterface $request): void
@@ -100,7 +102,8 @@ class TrackingService
 
     protected function getTrackIntervalMinutes(): int
     {
-        $configured = (int) $extConfig['graphApiToken'] ?? 15;
+        $extConfig = $this->extensionConfiguration->get('at_analytics_lite');
+        $configured = (int)($extConfig['trackIntervalMinutes'] ?? 15);
         return max(1, $configured);
     }
 
