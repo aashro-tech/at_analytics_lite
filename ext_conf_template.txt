@@ -1,0 +1,2 @@
+# cat=basic; type=int; label= Track Interval Minutes
+trackIntervalMinutes =

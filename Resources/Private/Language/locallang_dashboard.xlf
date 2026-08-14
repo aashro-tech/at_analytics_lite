@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-04-10T00:00:00Z" product-name="at_analytics_lite">
+        <header />
+        <body>
+            <trans-unit id="widgets.totalVisits.title">
+                <source>Analytics Total Visits</source>
+            </trans-unit>
+            <trans-unit id="widgets.totalVisits.description">
+                <source>Total tracked visits across all pages.</source>
+            </trans-unit>
+            <trans-unit id="widgets.totalVisits.subtitle">
+                <source>All-time page visits</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

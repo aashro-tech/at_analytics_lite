@@ -1,0 +1,152 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <f:asset.css identifier="at-analytics-lite-backend-dashboard"
+        href="EXT:at_analytics_lite/Resources/Public/Css/BackendDashboard.css" />
+
+    <div class="aa-dashboard">
+        <header class="aa-header">
+            <h1>Analytics Lite</h1>
+            <p class="aa-subtitle">Privacy-friendly traffic overview for your site.</p>
+        </header>
+
+        <section class="aa-kpi-row" aria-label="Key metrics">
+            <div class="aa-kpi-card">
+                <p class="aa-kpi-label">Total visits</p>
+                <p class="aa-kpi-value">{totalVisits}</p>
+            </div>
+            <div class="aa-kpi-card">
+                <p class="aa-kpi-label">Visits today</p>
+                <p class="aa-kpi-value">{visitsToday}</p>
+            </div>
+            <div class="aa-kpi-card">
+                <p class="aa-kpi-label">Live (last 5 min)</p>
+                <p class="aa-kpi-value">{liveVisitors}</p>
+            </div>
+        </section>
+
+        <div class="aa-main">
+            <section class="aa-card aa-card--flush" aria-labelledby="aa-chart-heading">
+                <h2 id="aa-chart-heading" class="aa-section-title" style="padding: 18px 20px 0; margin-bottom: 0;">
+                    Traffic trend</h2>
+                <f:if condition="{trafficChart}">
+                    <f:then>
+                        <div class="aa-chart-shell">
+                            <div class="aa-chart-head">
+                                <p class="aa-chart-title">Daily visits</p>
+                                <span class="aa-chart-chip">Last 7 days</span>
+                            </div>
+                            <div class="aa-chart" role="img"
+                                aria-label="Bar chart of visits per day for the last seven days">
+                                <f:for each="{trafficChart}" as="day">
+                                    <div class="aa-chart-item">
+                                        <span class="aa-chart-value">{day.total}</span>
+                                        <div class="aa-chart-bar-wrap">
+                                            <div class="aa-chart-bar" style="height: {day.percent}%;"
+                                                title="{day.date}: {day.total}"></div>
+                                        </div>
+                                        <span class="aa-chart-label">{day.label}</span>
+                                    </div>
+                                </f:for>
+                            </div>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <p class="aa-empty" style="padding: 18px 20px;">No traffic data for the last 7 days.</p>
+                    </f:else>
+                </f:if>
+            </section>
+
+            <aside class="aa-card" aria-label="Device breakdown">
+                <h2 class="aa-sidebar-title">Devices</h2>
+                <div class="aa-device-list">
+                    <div class="aa-device-item">
+                        <p class="aa-device-label">Desktop</p>
+                        <p class="aa-device-value">{deviceDesktop}</p>
+                    </div>
+                    <div class="aa-device-item">
+                        <p class="aa-device-label">Mobile</p>
+                        <p class="aa-device-value">{deviceMobile}</p>
+                    </div>
+                    <div class="aa-device-item">
+                        <p class="aa-device-label">Tablet</p>
+                        <p class="aa-device-value">{deviceTablet}</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <f:comment>
+            <section class="aa-card" aria-labelledby="aa-top-pages-heading">
+                <link rel="stylesheet" type="text/css"
+                    href="{f:uri.resource(path:'Css/DataTables.css', extensionName: 'at_analytics_lite')}" media="all">
+                <h2 id="aa-top-pages-heading" class="aa-section-title">Top pages</h2>
+
+                <f:if condition="{topPages}">
+                    <f:then>
+                        <div class="aa-table-wrap">
+                            <table class="aa-table" id="aaTopPagesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Page</th>
+                                        <th>Visits</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <f:for each="{topPages}" as="page">
+                                        <tr>
+                                            <td>
+                                                <f:if condition="{page.page_title}">
+                                                    <f:then>{page.page_title}</f:then>
+                                                    <f:else>Page #{page.page_uid}</f:else>
+                                                </f:if>
+                                            </td>
+                                            <td>{page.total}</td>
+                                        </tr>
+                                    </f:for>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <p class="aa-empty">No visit data collected yet.</p>
+                    </f:else>
+                </f:if>
+            </section>
+        </f:comment>
+
+        <section class="aa-card dataTable" aria-labelledby="aa-top-pages-heading">
+
+            <f:asset.css identifier="datatables-css" href="EXT:at_analytics_lite/Resources/Public/Css/DataTable.css" />
+            <h2 id="aa-top-pages-heading" class="aa-section-title">Top Pages</h2>
+            <f:if condition="{topPages}">
+                <f:then>
+
+                    <div class="aa-table-wrap">
+                        <table id="aaTopPagesTable" class="aa-table display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Page</th>
+                                    <th>Visits</th>
+                                    <th>Visits Date</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <!-- Convert TYPO3 data to JavaScript -->
+                   <div id="topPagesData" hidden>
+                        <f:format.json value="{topPages}" />
+                    </div>
+                </f:then>
+                <f:else>
+                    <p class="aa-empty">No visit data collected yet.</p>
+                </f:else>
+            </f:if>
+        </section>
+    </div>
+</f:section>
+
+</html>

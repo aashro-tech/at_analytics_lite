@@ -1,0 +1,29 @@
+{
+    "name": "aashro/at-analytics-lite",
+    "type": "typo3-cms-extension",
+    "description": "Privacy friendly analytics for TYPO3 CMS. It is a lightweight and simple analytics extension that respects user privacy and does not use cookies.",
+    "authors": [],
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^12 || ^13"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aashro\\AtAnalyticsLite\\": "Classes"
+        }
+    },
+    "replace": {
+        "typo3-ter/at-analytics-lite": "self.version"
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/public",
+            "extension-key": "at_analytics_lite"
+        }
+    }
+}

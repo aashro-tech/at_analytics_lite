@@ -1,0 +1,26 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Aashro\AtAnalyticsLite\:
+    resource: '../Classes/*'
+
+  dashboard.widget.Aashro_atanalyticslite_totalVisits:
+    class: TYPO3\CMS\Dashboard\Widgets\NumberWithIconWidget
+    arguments:
+      $dataProvider: '@Aashro\AtAnalyticsLite\Widgets\Provider\TotalVisitsDataProvider'
+      $options:
+        title: 'LLL:EXT:at_analytics_lite/Resources/Private/Language/locallang_dashboard.xlf:widgets.totalVisits.title'
+        subtitle: 'LLL:EXT:at_analytics_lite/Resources/Private/Language/locallang_dashboard.xlf:widgets.totalVisits.subtitle'
+        icon: 'module-atanalyticslite'
+    tags:
+      - name: dashboard.widget
+        identifier: 'aashro_atanalyticslite_totalVisits'
+        groupNames: 'general'
+        title: 'LLL:EXT:at_analytics_lite/Resources/Private/Language/locallang_dashboard.xlf:widgets.totalVisits.title'
+        description: 'LLL:EXT:at_analytics_lite/Resources/Private/Language/locallang_dashboard.xlf:widgets.totalVisits.description'
+        iconIdentifier: 'content-widget-number'
+        height: 'small'
+        width: 'small'

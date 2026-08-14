@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-04-10T00:00:00Z" product-name="at_analytics_lite">
+        <header />
+        <body>
+            <trans-unit id="task.cleanup.title">
+                <source>Analytics Lite: Cleanup old visits</source>
+            </trans-unit>
+            <trans-unit id="task.cleanup.description">
+                <source>Deletes old raw visit records (older than 180 days).</source>
+            </trans-unit>
+            <trans-unit id="task.aggregate.title">
+                <source>Analytics Lite: Aggregate stats</source>
+            </trans-unit>
+            <trans-unit id="task.aggregate.description">
+                <source>Builds daily aggregated statistics from raw visit records.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
